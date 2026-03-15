@@ -34,3 +34,40 @@ platform active {pluto_platform_adi}
 platform generate -domains 
 platform active {pluto_platform_adi}
 platform generate -domains 
+platform clean
+platform generate
+platform clean
+platform generate
+platform clean
+platform generate
+bsp reload
+domain active {zynq_fsbl}
+bsp reload
+domain active {freertos10_xilinx_ps7_cortexa9_0}
+bsp reload
+bsp reload
+bsp setlib -name lwip211 -ver 1.8
+bsp write
+bsp reload
+catch {bsp regenerate}
+bsp removelib -name lwip211
+bsp setlib -name lwip211 -ver 1.8
+bsp write
+platform clean
+bsp config api_mode "SOCKET_API"
+bsp config pbuf_pool_size "1024"
+bsp config memp_n_pbuf "1024"
+bsp config memp_n_sys_timeout "8"
+bsp config mem_size "131072"
+bsp config memp_num_api_msg "16"
+bsp config phy_link_speed "CONFIG_LINKSPEED_AUTODETECT"
+bsp write
+bsp reload
+catch {bsp regenerate}
+platform clean
+platform generate
+bsp reload
+platform clean
+platform generate
+platform clean
+platform generate
